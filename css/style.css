@@ -32,6 +32,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 body {
@@ -638,18 +639,63 @@ section {
 @media (max-width: 768px) {
   .nav-links {
     position: fixed;
-    top: 70px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 70px);
-    background: rgba(255, 255, 255, 0.98);
+    top: 68px;
+    right: 0;
+    width: min(240px, calc(100vw - 0.5rem));
+    background: #ffffff;
     flex-direction: column;
-    padding: var(--spacing-md);
-    transition: left 0.3s ease;
+    gap: 0.35rem;
+    padding: 1rem 0.75rem 1.25rem 0.75rem;
+    border-left: 1px solid rgba(155, 126, 232, 0.18);
+    box-shadow: -4px 0 22px rgba(0, 0, 0, 0.1);
+    transform: translateX(110%);
+    transition: transform 0.25s ease;
+    z-index: 1000;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    border-radius: 0 0 0 20px;
   }
 
   .nav-links.active {
-    left: 0;
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    margin: 0;
+  }
+
+  .nav-links .nav-link {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 0.9rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--color-text);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .nav-links .nav-link:hover,
+  .nav-links .nav-link.active {
+    color: var(--color-primary);
+    background: rgba(155, 126, 232, 0.1);
+    transform: translateX(2px);
+  }
+
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 900;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .menu-overlay.active {
+    display: block;
+    opacity: 1;
   }
 
   .menu-toggle {

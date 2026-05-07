@@ -16,18 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const menuOverlay = document.getElementById('menuOverlay');
+
+  const closeMenu = () => {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+    menuOverlay.classList.remove('active');
+  };
+
   menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
     navLinks.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
   });
+
+  if (menuOverlay) {
+    menuOverlay.addEventListener('click', closeMenu);
+  }
 
   navLinkItems.forEach(link => {
     link.addEventListener('click', () => {
       navLinkItems.forEach(l => l.classList.remove('active'));
       link.classList.add('active');
 
-      menuToggle.classList.remove('active');
-      navLinks.classList.remove('active');
+      closeMenu();
     });
   });
 
